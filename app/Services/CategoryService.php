@@ -25,4 +25,10 @@ class CategoryService
             return $category;
         });
     }
+    public function updateCategory(Category $category,$request){
+        return app(TryService::class)(function () use ($category,$request){
+            $category->update($request);
+            return $category;
+        });
+    }
 }

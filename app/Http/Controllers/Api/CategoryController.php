@@ -51,7 +51,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $result=$this->service->updateCategory($category,$request->all());
+        $actionResult=$result->success?
+            (new ApiResponseBuilder())->message("Category updated successfully."):
+            (new ApiResponseBuilder())->message("Unable to update category.");
+        return $actionResult->data(new CategoryResource($result->data))->response();
     }
 
     /**
