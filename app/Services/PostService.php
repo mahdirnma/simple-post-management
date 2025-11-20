@@ -31,4 +31,9 @@ class PostService
             return $post;
         });
     }
+    public function deletePost(Post $post){
+        return app(TryService::class)(function () use ($post){
+            $post->update(['is_active' => 0]);
+        });
+    }
 }
