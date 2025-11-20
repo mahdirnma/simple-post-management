@@ -18,4 +18,11 @@ class PostService
             return Post::create($post);
         });
     }
+
+    public function showPost(Post $post)
+    {
+        return app(TryService::class)(function () use ($post){
+            return $post;
+        });
+    }
 }
