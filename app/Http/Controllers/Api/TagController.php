@@ -40,7 +40,11 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $result=$this->service->showTag($tag);
+        $actionResult=$result->success?
+            (new ApiResponseBuilder())->message('Tag showed successfully.'):
+            (new ApiResponseBuilder())->message('Error in showed tag.');
+        return $actionResult->data(new TagResource($result->data))->response();
     }
 
     /**
