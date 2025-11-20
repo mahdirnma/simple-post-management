@@ -25,4 +25,10 @@ class PostService
             return $post;
         });
     }
+    public function UpdatePost(Post $post,$request){
+        return app(TryService::class)(function () use ($post,$request){
+            $post->update($request);
+            return $post;
+        });
+    }
 }
