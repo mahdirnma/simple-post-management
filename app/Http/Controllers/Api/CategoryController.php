@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Services\ApiResponseBuilder;
@@ -49,7 +50,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         $result=$this->service->updateCategory($category,$request->all());
         $actionResult=$result->success?
@@ -63,6 +64,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $result=$this->service->deleteCategory($category);
+        $actionResult=$result->success?
+            (new ApiResponseBuilder())->message("Category deleted successfully."):
+            (new ApiResponseBuilder())->message("Unable to delete category.");
+        return $actionResult->response();
     }
 }
