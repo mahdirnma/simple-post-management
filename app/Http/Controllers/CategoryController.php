@@ -11,15 +11,12 @@ use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
-    public function __construct(public CategoryService $service){}
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $result=$this->service->getCategories();
-        return (new ApiResponseBuilder())->data(CategoryResource::collection($result->data))->response();
     }
 
     /**
@@ -27,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $result=$this->service->addCategory();
     }
 
     /**
