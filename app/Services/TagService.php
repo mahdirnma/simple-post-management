@@ -25,4 +25,12 @@ class TagService
             return $tag;
         });
     }
+
+    public function updateTag(Tag $tag,$request)
+    {
+        return app(TryService::class)(function () use ($tag,$request){
+            $tag->update($request);
+            return $tag;
+        });
+    }
 }

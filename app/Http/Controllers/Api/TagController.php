@@ -52,7 +52,11 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $result=$this->service->updateTag($tag,$request->all());
+        $actionResult=$result->success?
+            (new ApiResponseBuilder())->message('Tag updated successfully.'):
+            (new ApiResponseBuilder())->message('Error in updated tag.');
+        return $actionResult->data(new TagResource($result->data))->response();
     }
 
     /**
